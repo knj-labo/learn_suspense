@@ -1,3 +1,4 @@
+import "./styles/reset.css";
 import "./styles/globals.css";
 
 const mockData = {
@@ -12,7 +13,7 @@ const mockData = {
       },
     ],
   },
-  fetchedAt: false,
+  fetchedAt: "2020-01-01T00:00:00.000Z",
 };
 
 const Detail = ({ pokemon }: any) => {
@@ -36,25 +37,24 @@ const Detail = ({ pokemon }: any) => {
           ))}
         </ul>
       </section>
-      <small>{pokemon.fetchedAt}</small>
+      <small className={"absolute right-3 top-3"}>{pokemon.fetchedAt}</small>
     </>
   );
 };
 
 const PokemonInfo = () => {
   return (
-    <div>
-      <div className={"flex justify-between"}>
+    <article className={"rounded bg-white p-6 flex flex-col relative"}>
+      <div className={"flex justify-center w-full"}>
         <img src={"https://via.placeholder.com/150"} alt={mockData.name} />
       </div>
       <Detail pokemon={mockData} />
-    </div>
+    </article>
   );
 };
 const App = () => {
   return (
-    <div className="rounded bg-blue-50 p-6 relative">
-      <div className="mr-6">Heading</div>
+    <div className="min-h-screen flex justify-center items-center bg-blue-50">
       <PokemonInfo />
     </div>
   );
