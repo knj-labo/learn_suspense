@@ -16,7 +16,7 @@ const mockData = {
   fetchedAt: "2020-01-01T00:00:00.000Z",
 };
 
-const Detail = ({ pokemon }: any) => {
+function Detail({ pokemon }: any) {
   return (
     <>
       <section>
@@ -27,7 +27,7 @@ const Detail = ({ pokemon }: any) => {
       </section>
       <section>
         <ul>
-          {pokemon.attacks.special.map((attack:any) => (
+          {pokemon.attacks.special.map((attack: any) => (
             <li key={attack.name}>
               <label>{attack.name}</label>:
               <span>
@@ -37,27 +37,27 @@ const Detail = ({ pokemon }: any) => {
           ))}
         </ul>
       </section>
-      <small className={"absolute right-3 top-3"}>{pokemon.fetchedAt}</small>
+      <small className="absolute right-3 top-3">{pokemon.fetchedAt}</small>
     </>
   );
-};
+}
 
-const PokemonInfo = () => {
+function PokemonInfo() {
   return (
-    <article className={"rounded bg-white p-6 flex flex-col relative"}>
-      <div className={"flex justify-center w-full"}>
-        <img src={"https://via.placeholder.com/150"} alt={mockData.name} />
+    <article className="rounded bg-white p-6 flex flex-col relative">
+      <div className="flex justify-center w-full">
+        <img src="https://via.placeholder.com/150" alt={mockData.name} />
       </div>
       <Detail pokemon={mockData} />
     </article>
   );
-};
-const App = () => {
+}
+function App() {
   return (
     <div className="min-h-screen flex justify-center items-center bg-blue-50">
       <PokemonInfo />
     </div>
   );
-};
+}
 
 export default App;
