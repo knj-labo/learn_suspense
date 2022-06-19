@@ -16,8 +16,7 @@ const mockData = {
   fetchedAt: "2020-01-01T00:00:00.000Z",
 };
 
-function Detail({ pokemon }: any) {
-  return (
+const Detail = ({ pokemon }: any) => (
     <>
       <section>
         <h2>
@@ -39,25 +38,20 @@ function Detail({ pokemon }: any) {
       </section>
       <small className="absolute right-3 top-3">{pokemon.fetchedAt}</small>
     </>
-  );
-}
+  )
 
-function PokemonInfo() {
-  return (
+const PokemonInfo = () => (
     <article className="rounded bg-white p-6 flex flex-col relative">
       <div className="flex justify-center w-full">
         <img src="https://via.placeholder.com/150" alt={mockData.name} />
       </div>
       <Detail pokemon={mockData} />
     </article>
-  );
-}
-function App() {
-  return (
+  )
+const App = () => (
     <div className="min-h-screen flex justify-center items-center bg-blue-50">
       <PokemonInfo />
     </div>
-  );
-}
+  )
 
 export default App;

@@ -29,6 +29,10 @@
         "tsx": "never"
       }
     ],
+    "react/function-component-definition": [
+      "error",
+      { "namedComponents": "arrow-function" }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       "error",
