@@ -1,7 +1,12 @@
+import type { Query } from "@favware/graphql-pokemon";
 import { sleep } from "./sleep";
 import { formatDate } from "./format-date";
 
-function fetchPokemon(name: string, delay = 1500) {
+interface GraphQLPokemonResponse<K extends keyof Omit<Query, "__typename">> {
+  data: Record<K, Omit<Query[K], "__typename">>;
+}
+
+export const fetchPokemon = (name: string, delay = 1500) => {
   const endTime = Date.now() + delay;
   const pokemonQuery = `
     query ($name: String) {
@@ -22,11 +27,12 @@ function fetchPokemon(name: string, delay = 1500) {
   `;
 
   return window
-    .fetch("https://graphql-pokemon.now.sh", {
+    .fetch("https://graphqlpokemon.favware.tech/", {
       // learn more about this API here: https://graphql-pokemon.now.sh/
       method: "POST",
       headers: {
-        "content-type": "application/json;charset=UTF-8",
+        "content-type": "application/json",
+        // "Content-Type": "application/json;charset=UTF-8",
       },
       body: JSON.stringify({
         query: pokemonQuery,
@@ -46,4 +52,32 @@ function fetchPokemon(name: string, delay = 1500) {
       }
       return Promise.reject(new Error(`No pokemon with the name "${name}"`));
     });
-}
+};
+
+export const fetchPokemons = () => {
+  return;
+  window
+    .fetch("https://graphqlpokemon.favware.tech/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+      {
+        getPokemon(pokemon: dragonite) {
+            sprite
+            num
+            species
+            color
+        }
+      }
+    `,
+      }),
+    })
+    .then((res) => res.json() as Promise<GraphQLPokemonResponse<"getPokemon">>)
+    .then((response) => {
+      const { getPokemon } = response.data;
+      return getPokemon;
+    });
+};
